@@ -32,7 +32,7 @@ export default function TableOfContents ({ blockMap, frontMatter, pageId, pageTi
 
   /**
    * Get the level of the title (1-6)
-   * @param {Object} node - 标题节点
+   * @param {Object} node - 標題節點
    */
   const getHeaderLevel = (node) => {
     // Get the type information of the corresponding block through blockMap
