@@ -5,20 +5,23 @@
 # 原理：Netlify 通過 @netlify/plugin-nextjs（v5，基於 OpenNext）
 # 把 Next.js 服務端構建產物打包為無伺服器函數，public/ 作為靜態站。
 #
-# 重要：本項目在「構建期」會連接外部 Postgres（評論系統
-# lib/comment-config.js -> lib/db.js -> ensureDbTables()），
-# 因此部署到 Netlify 前必須在 Netlify 站點 Settings -> Environment
-# variables 裡配置（建議用 Secrets）：
+# 重要：本項目的評論系統使用 PostgreSQL（Fuma Comment）。
+# `DATABASE_URL` 現在僅在**運行時**需要，構建時不再強制要求。
 #
-#   DATABASE_URL     = postgres://user:pass@host:5432/db
-#       （必須是構建時可直連的公網地址）
-#   GITHUB_ID        = ...   (GitHub OAuth，next-auth)
-#   GITHUB_SECRET    = ...
-#   NEXTAUTH_SECRET  = ...   (隨機生成: openssl rand -base64 32)
+# 在 Netlify 站點 Settings -> Environment variables 配置：
 #
-# 同時保持原有部落格變量：
-#   NOTION_PAGE_ID / NOTION_SPACES_ID / NOTION_ACCESS_TOKEN
-#   TELEGRAM_TOKEN（如有使用 Telegram 按鈕）
+#   運行時變數（評論系統需要）：
+#     DATABASE_URL     = postgres://user:pass@host:5432/db
+#         （必須是公網可直連的 PostgreSQL 地址）
+#     GITHUB_ID        = ...   (GitHub OAuth Client ID)
+#     GITHUB_SECRET    = ...   (GitHub OAuth Secret)
+#     NEXTAUTH_SECRET  = ...   (隨機生成: openssl rand -base64 32)
+#
+#   構建 + 運行時變數（Notion 內容需要）：
+#     NOTION_PAGE_ID   = ...   (Notion 根頁面 ID，必要)
+#     NOTION_SPACES_ID = ...   (Notion 工作區 ID，建議)
+#     NOTION_ACCESS_TOKEN = ... (私有頁面需要)
+#     TELEGRAM_TOKEN   = ...   (Telegram Bot，選填)
 
 [build]
   # 與 package.json 一致：build 走 dotenv-cli，postbuild 生成 sitemap
