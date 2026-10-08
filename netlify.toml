@@ -1,0 +1,60 @@
+# Netlify 部署配置
+#
+# 本文件為純新增，不影響 Vercel / Cloudflare Pages 部署。
+#
+# 原理：Netlify 通過 @netlify/plugin-nextjs（v5，基於 OpenNext）
+# 把 Next.js 服務端構建產物打包為無伺服器函數，public/ 作為靜態站。
+#
+# 重要：本項目在「構建期」會連接外部 Postgres（評論系統
+# lib/comment-config.js -> lib/db.js -> ensureDbTables()），
+# 因此部署到 Netlify 前必須在 Netlify 站點 Settings -> Environment
+# variables 裡配置（建議用 Secrets）：
+#
+#   DATABASE_URL     = postgres://user:pass@host:5432/db
+#       （必須是構建時可直連的公網地址）
+#   GITHUB_ID        = ...   (GitHub OAuth，next-auth)
+#   GITHUB_SECRET    = ...
+#   NEXTAUTH_SECRET  = ...   (隨機生成: openssl rand -base64 32)
+#
+# 同時保持原有部落格變量：
+#   NOTION_PAGE_ID / NOTION_SPACES_ID / NOTION_ACCESS_TOKEN
+#   TELEGRAM_TOKEN（如有使用 Telegram 按鈕）
+
+[build]
+  # 與 package.json 一致：build 走 dotenv-cli，postbuild 生成 sitemap
+  command = "npm run build"
+  # 靜態資源發布目錄（public/，含生成的 sitemap 與 comments JS）
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Next.js 運行時（Netlify 官方 v5 適配器；未鎖定版本以跟隨官方升級）
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ── 靜態資源緩存標頭（與 vercel.json 保持一致）─────────────────
+[[headers]]
+  path = "/favicon.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  path = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  path = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  path = "/cover.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  path = "/avatar_color.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  path = "/wechat-pay.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
