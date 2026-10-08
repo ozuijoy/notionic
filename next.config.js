@@ -1,6 +1,6 @@
 const BLOG = require('./blog.config')
 
-// Derive the short locale key from BLOG.lang (e.g. 'zh-CN' -> 'zh', 'en-US' -> 'en')
+// Derive the short locale key from BLOG.lang (e.g. 'zh-TW' -> 'zh', 'en-US' -> 'en')
 const defaultLocale = BLOG.lang ? BLOG.lang.split('-')[0] : 'en'
 
 module.exports = {
