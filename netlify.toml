@@ -26,6 +26,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Token 只在伺服器執行時讀取；掃描會誤判 .next server bundle
+  SECRETS_SCAN_OMIT_KEYS = "NOTION_ACCESS_TOKEN,TELEGRAM_TOKEN"
 
 # Next.js 運行時（Netlify 官方 v5 適配器；未鎖定版本以跟隨官方升級）
 [[plugins]]

@@ -8,8 +8,6 @@ module.exports = {
   env: {
     NOTION_PAGE_ID: process.env.NOTION_PAGE_ID || '',
     NOTION_SPACES_ID: process.env.NOTION_SPACES_ID || '',
-    NOTION_ACCESS_TOKEN: process.env.NOTION_ACCESS_TOKEN || '',
-    TELEGRAM_TOKEN: process.env.TELEGRAM_TOKEN || '',
     COMMENTS_ENABLED: process.env.DATABASE_URL ? 'true' : '',
   },
   i18n: {
