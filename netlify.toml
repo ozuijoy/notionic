@@ -3,7 +3,8 @@
 # 本文件為純新增，不影響 Vercel / Cloudflare Pages 部署。
 #
 # 原理：Netlify 通過 @netlify/plugin-nextjs（v5，基於 OpenNext）
-# 把 Next.js 服務端構建產物打包為無伺服器函數，public/ 作為靜態站。
+# 把 Next.js 服務端構建產物打包為無伺服器函數。
+# publish 必須是 .next（plugin 讀取 Next.js 構建輸出），不可設為 public。
 #
 # 評論系統（Fuma Comment）為可選功能，不設 DATABASE_URL 也能部署。
 # 若要啟用評論，在 Netlify 站點 Settings -> Environment variables 配置：
@@ -21,8 +22,7 @@
 [build]
   # 與 package.json 一致：build 走 dotenv-cli，postbuild 生成 sitemap
   command = "npm run build"
-  # 靜態資源發布目錄（public/，含生成的 sitemap 與 comments JS）
-  publish = "public"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20"
