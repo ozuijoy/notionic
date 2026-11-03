@@ -50,7 +50,7 @@ This project includes a `netlify.toml` configuration file. To deploy to Netlify:
 5. Set the required environment variables in Netlify Dashboard → Site settings → Environment variables
 6. Click "Deploy site"
 
-Make sure `DATABASE_URL` (if using comments) points to a publicly accessible PostgreSQL instance that Netlify can reach at runtime.
+Comments are optional. If `DATABASE_URL` is unset, the site still builds and deploys; the Fuma comment widget is hidden. When using comments, `DATABASE_URL` must point to a PostgreSQL instance Netlify can reach at runtime.
 
 More details about Notionic deployment:
 

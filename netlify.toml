@@ -5,13 +5,11 @@
 # 原理：Netlify 通過 @netlify/plugin-nextjs（v5，基於 OpenNext）
 # 把 Next.js 服務端構建產物打包為無伺服器函數，public/ 作為靜態站。
 #
-# 重要：本項目在「構建期」會連接外部 Postgres（評論系統
-# lib/comment-config.js -> lib/db.js -> ensureDbTables()），
-# 因此部署到 Netlify 前必須在 Netlify 站點 Settings -> Environment
-# variables 裡配置（建議用 Secrets）：
+# 評論系統（Fuma Comment）為可選功能，不設 DATABASE_URL 也能部署。
+# 若要啟用評論，在 Netlify 站點 Settings -> Environment variables 配置：
 #
 #   DATABASE_URL     = postgres://user:pass@host:5432/db
-#       （必須是構建時可直連的公網地址）
+#       （運行時可直連的公網 Postgres；構建期不再強制連線）
 #   GITHUB_ID        = ...   (GitHub OAuth，next-auth)
 #   GITHUB_SECRET    = ...
 #   NEXTAUTH_SECRET  = ...   (隨機生成: openssl rand -base64 32)

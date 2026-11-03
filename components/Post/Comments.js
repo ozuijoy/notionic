@@ -29,9 +29,11 @@ const Comments = ({ frontMatter }) => {
       {BLOG.comment && BLOG.comment.provider === 'supacomments' && (
         <SupaCommentsComponent />
       )}
-      {BLOG.comment && BLOG.comment.provider === 'fuma' && (
-        <FumaCommentsComponent frontMatter={frontMatter} />
-      )}
+      {BLOG.comment &&
+        BLOG.comment.provider === 'fuma' &&
+        process.env.COMMENTS_ENABLED === 'true' && (
+          <FumaCommentsComponent frontMatter={frontMatter} />
+        )}
     </div>
   )
 }
