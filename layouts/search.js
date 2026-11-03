@@ -3,13 +3,13 @@ import BlogPost from '@/components/BlogPost'
 import Container from '@/components/Container'
 import Tags from '@/components/Common/Tags'
 import PropTypes from 'prop-types'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 
 const SearchLayout = ({ tags, posts, currentTag }) => {
   const [searchValue, setSearchValue] = useState('')
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
 
   let filteredBlogPosts = []
   if (posts) {

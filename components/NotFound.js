@@ -1,4 +1,4 @@
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -6,7 +6,7 @@ import Logo from '@/components/Common/Logo'
 
 const Page404 = ({ statusCode }) => {
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
   return (
     <div className='py-6 sm:py-8 lg:py-12'>
       <div className='max-w-screen-2xl px-4 md:px-8 mx-auto'>

@@ -2,7 +2,7 @@ import BLOG from '@/blog.config'
 import Link from 'next/link'
 import Social from '../Common/Social.js'
 import { useState } from 'react'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 import NewspaperIcon from '@heroicons/react/24/outline/NewspaperIcon'
 import ClipboardDocumentCheckIcon from '@heroicons/react/24/outline/ClipboardDocumentCheckIcon'
@@ -11,7 +11,7 @@ import NotionRenderer from '@/components/Post/NotionRenderer'
 const NewsletterHero = ({ blockMap }) => {
   const [showCopied, setShowCopied] = useState(false)
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
 
   const clickCopy = async () => {
     setShowCopied(true)

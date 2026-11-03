@@ -1,4 +1,4 @@
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 import Social from '../Common/Social.js'
 import Avatar from './Avatar.js'
@@ -6,7 +6,7 @@ import NotionRenderer from '@/components/Post/NotionRenderer'
 
 const NoteHero = ({ blockMap }) => {
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
   return (
     <>
       <div className='container mx-auto flex px-5 py-2 mb-10 md:flex-row flex-col items-center'>

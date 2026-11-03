@@ -1,6 +1,6 @@
 import BLOG from '@/blog.config'
 import { useState } from 'react'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 
 import WechatPay from '@/components/Post/WechatPay'
@@ -11,7 +11,7 @@ const PostFooter = () => {
   const [showPay, setShowPay] = useState(false)
   const { locale } = useRouter()
   const router = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
 
   return (
     <div className='w-full pb-12 justify-between font-medium text-gray-500 dark:text-gray-400'>

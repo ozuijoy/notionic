@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import BLOG from '@/blog.config'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 import UserIcon from '@heroicons/react/24/outline/UserIcon'
 import UsersIcon from '@heroicons/react/24/outline/UsersIcon'
@@ -10,7 +10,7 @@ import Social from '../Common/Social.js'
 const Footer = ({ fullWidth }) => {
   const router = useRouter()
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
 
   let activeMenu = ''
   if (router.query.slug) {

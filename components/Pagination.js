@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import BLOG from '@/blog.config'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 import ChevronRightIcon from '@heroicons/react/24/outline/ChevronRightIcon'
 import ChevronLeftIcon from '@heroicons/react/24/outline/ChevronLeftIcon'
 
 const Pagination = ({ page, showNext }) => {
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
   const currentPage = +page
   let additionalClassName = 'justify-between'
   if (currentPage === 1 && showNext) additionalClassName = 'justify-end'

@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useState, useRef } from 'react'
 import Link from 'next/link'
 import BLOG from '@/blog.config'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 import HomeIcon from '@heroicons/react/24/outline/HomeIcon'
 import NewspaperIcon from '@heroicons/react/24/outline/NewspaperIcon'
@@ -16,7 +16,7 @@ import Logo from '@/components/Common/Logo'
 const NavBar = () => {
   const router = useRouter()
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
   const [showMenu, setShowMenu] = useState(false)
 
   let activeMenu = ''

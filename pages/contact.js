@@ -1,12 +1,12 @@
 import Container from '@/components/Container'
 import ContactForm from '@/components/ContactForm'
 import BLOG from '@/blog.config'
-import { lang } from '@/lib/lang'
+import { getT } from '@/lib/lang'
 import { useRouter } from 'next/router'
 
 export const Contact = () => {
   const { locale } = useRouter()
-  const t = lang[locale]
+  const t = getT(locale)
   return (
     <Container title={BLOG.title} description={BLOG.description}>
       <div className='mb-8 md:mb-16 text-gray-600 dark:text-gray-200'>
